@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 function RoundButton({ title, color, background }) {
     return (
         <View>
-            <Text style={{ color }}>dddd</Text>
+            <Text style={{ color }}>{title}</Text>
         </View>
     );
 }

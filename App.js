@@ -2,14 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 //
 import Timer from './Timer';
-// import RoundButton from './RoundButton';
+import RoundButton from './RoundButton';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <Timer interval={1111} />
-        {/* <RoundButton title="Start" color="#50D167" background="#1B361F"/> */}
+        <RoundButton title="Start" color="#50D167" background="#1B361F"/>
       </View>
     );
   }
