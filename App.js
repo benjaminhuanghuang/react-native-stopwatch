@@ -19,10 +19,11 @@ export default class App extends React.Component {
       };
   }
 
-  reset() {
-
+  componentWillUnmount()
+  {
+    clearInterval(this.timer);
   }
-
+    
   start() {
     const now = new Date().getTime();
     this.setState({
@@ -91,8 +92,8 @@ export default class App extends React.Component {
           interval={laps.reduce((total, curr) => total + curr, 0) + timer} />
         {laps.length === 0 &&
           <RowContainer>
-            <RoundButton title="Reset" color="#FFFFFF" background="#3D3D3D"
-              onPress={() => this.reset()} />
+            <RoundButton title="Lap" color="#8B8B90" background="#151515"
+              disabled />
             <RoundButton title="Start" color="#50D167" background="#1B361F"
               onPress={() => this.start()} />
           </RowContainer>
