@@ -36,7 +36,7 @@ export function LapsTable({ laps }) {
             {laps.map((lap, index) => (
                 <Lap key={index}
                      number={laps.length - index}
-                     inverval={lap}
+                     interval={lap}
                      slowest={lap === max}
                      fastest={lap === min} />
             ))}

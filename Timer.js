@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text } from 'react-native';
 
 import moment from 'moment';
-
 
 function Timer({ interval, style }) {
     const duration = moment.duration(interval);
@@ -12,7 +11,6 @@ function Timer({ interval, style }) {
             {duration.minutes()}:{duration.seconds()},{centiseconds}
         </Text>
     );
-
 }
 
 export default Timer;
