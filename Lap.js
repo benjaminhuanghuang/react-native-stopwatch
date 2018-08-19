@@ -17,7 +17,7 @@ function Lap({ number, interval, fastest, slowest }) {
     );
 }
 
-export function LapsTable({ laps }) {
+export function LapsTable({ laps, timer }) {
     const finishedLaps = laps.slice(1);  // copy [1...]
     let min = Number.MAX_SAFE_INTEGER;
     let max = Number.MIN_SAFE_INTEGER;
@@ -35,10 +35,10 @@ export function LapsTable({ laps }) {
         <ScrollView style={styles.scrollView}>
             {laps.map((lap, index) => (
                 <Lap key={index}
-                     number={laps.length - index}
-                     interval={lap}
-                     slowest={lap === max}
-                     fastest={lap === min} />
+                    number={laps.length - index}
+                    interval={index === 0 ? timer + lap : lap}
+                    slowest={lap === max}
+                    fastest={lap === min} />
             ))}
         </ScrollView>
     );
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     lapText: {
         color: "#FFFFFF",
         fontSize: 18,
+        width: 30
     },
 
     scrollView: {

@@ -1,13 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+    StyleSheet, Text, View,
+    TouchableOpacity
+} from 'react-native';
 
-function RoundButton({ title, color, background }) {
+function RoundButton({ title, color, background, onPress, disabled }) {
     return (
-        <View style={[styles.roundButton, { backgroundColor: background }]}>
+        <TouchableOpacity onPress={() => !disabled && onPress()}
+            style={[styles.roundButton, { backgroundColor: background }]}
+            activeOpacity={disabled ? 1 : 0.7}>
             <View style={styles.buttonBorder}>
                 <Text style={[styles.buttonTitle, { color }]}>{title}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 
