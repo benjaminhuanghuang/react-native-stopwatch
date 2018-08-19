@@ -12,7 +12,7 @@ function Lap({ number, interval, fastest, slowest }) {
     return (
         <View style={styles.lap}>
             <Text style={lapTextStyle}>Lap {number}</Text>
-            <Timer style={lapTextStyle} interval={interval} />
+            <Timer style={[lapTextStyle, styles.lapTimer]} interval={interval} />
         </View>
     );
 }
@@ -52,11 +52,14 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         paddingVertical: 10
     },
+    lapTimer:
+    {
+        width: 30
+    },
 
     lapText: {
         color: "#FFFFFF",
-        fontSize: 18,
-        width: 30
+        fontSize: 18
     },
 
     scrollView: {

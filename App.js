@@ -38,7 +38,48 @@ export default class App extends React.Component {
     }, 100);
   }
 
+  lap() {
+    const timestamp = new Date().getTime();
+    const { laps, now, start } = this.state;
+    const [firstLap, ...other] = laps;
+    this.setState({
+      laps: [0, firstLap + now - start, ...other],
+      start: timestamp,
+      now: timestamp,
+    });
+  }
 
+  stop() {
+    clearInterval(this.timer);
+    const { laps, now, start } = this.state;
+    const [firstLap, ...other] = laps;
+    this.setState({
+      laps: [firstLap + now - start, ...other],
+      start: 0,
+      now: 0,
+    });
+  }
+
+  reset() {
+    this.setState({
+      laps: [],
+      start: 0,
+      now: 0,
+    });
+  }
+
+  resume() {
+    const now = new Date().getTime();
+    this.setState({
+      start: now,
+      now,
+    });
+    this.timer = setInterval(() => {
+      this.setState(
+        { now: new Date().getTime() }
+      );
+    }, 100);
+  }
 
   render() {
     const { now, start, laps } = this.state;
@@ -46,7 +87,8 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Timer style={styles.timer} interval={timer} />
+        <Timer style={styles.timer}
+          interval={laps.reduce((total, curr) => total + curr, 0) + timer} />
         {laps.length === 0 &&
           <RowContainer>
             <RoundButton title="Reset" color="#FFFFFF" background="#3D3D3D"
@@ -58,9 +100,17 @@ export default class App extends React.Component {
         {start > 0 &&
           <RowContainer>
             <RoundButton title="Lap" color="#FFFFFF" background="#3D3D3D"
-              onPress={() => this.reset()} />
+              onPress={() => this.lap()} />
             <RoundButton title="Stop" color="#E33935" background="#3C1715"
-              onPress={() => this.start()} />
+              onPress={() => this.stop()} />
+          </RowContainer>
+        }
+        {laps.length > 0 && start === 0 &&
+          <RowContainer>
+            <RoundButton title="Reset" color="#FFFFFF" background="#3D3D3D"
+              onPress={() => this.reset()} />
+            <RoundButton title="Resume" color="#50D167" background="#1B361F"
+              onPress={() => this.resume()} />
           </RowContainer>
         }
         <LapsTable laps={this.state.laps} timer={timer} />
